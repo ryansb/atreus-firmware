@@ -26,8 +26,8 @@ build: $(TARGET).hex
 #
 #   make upload LAYOUT=softdvorak
 upload: $(TARGET).hex
-	while [ ! -r $(USB) ]; do sleep 1; done; \
-	avrdude -p $(MCU) -c avr109 -U flash:w:$(TARGET).hex -P $(USB)
+	while [ ! -e $(USB) ]; do sleep 1; done; \
+	sudo avrdude -p $(MCU) -c avr109 -U flash:w:$(TARGET).hex -P $(USB)
 
 # Build a keyboard layout from a JSON description.
 jsonlayout: atreus.el $(LAYOUT).json
@@ -41,7 +41,7 @@ clean:
 layout.h: $(LAYOUT_DEPENDS)
 	-cp -n layout_qwerty.h layout.h
 
-$(TARGET).o: layout.h
+$(TARGET).o: norman.h layout_common.h
 usb_keyboard.o: usb_keyboard.h
 
 $(TARGET): $(TARGET).o usb_keyboard.o
