@@ -76,7 +76,7 @@ int last_presses[KEY_COUNT];
 // * layer_functions: array of void function pointers
 // ... plus any functions included in layer_functions
 // per_cycle void function callback
-#include "layout.h"
+#include "norman.h"
 
 
 // Matrix scanning logic
